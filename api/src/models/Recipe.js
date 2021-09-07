@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    highlights: {
+    summary: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -21,7 +21,10 @@ module.exports = (sequelize) => {
     score: {
       type: DataTypes.INTEGER,
       allowNull: true,
-
+    },
+    ingredient: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     image: {
       type: DataTypes.STRING,
