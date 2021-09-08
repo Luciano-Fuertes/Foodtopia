@@ -4,6 +4,10 @@ const { Router } = require('express');
 const axios = require('axios');
 const { Recipe, Diet } = require('../db')
 
+require('dotenv').config();
+
+const { YOUR_API_KEY } = process.env;
+
 
 const router = Router();
 
@@ -12,13 +16,13 @@ const router = Router();
 
 const apiData = async () => {
     const wholeThing = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=10&addRecipeInformation=true`)
-    const result = await wholeThing.results.map(item => {
+    const result = await wholeThing.data.results.map(item => {
         return {
             id: item.id,
             name: item.title,
             image: item.image,
             summary: item.summary,
-            ingredient: item.extendedIngredients.map(ing => {
+            ingredient: item.extendedIngredients?.map(ing => {
                 return {
                     name: ing.name,
                     amount: item.original,
@@ -68,7 +72,7 @@ router.get('/recipes', async (req, res) => {
 
 router.get('/types', async (req, res) => {
     const dietApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=10&addRecipeInformation=true`);
-    const allDiet = dietApi.map(e => e.diets)
+    const allDiet = dietApi.data.results.map(e => e.diets)
     const reducedDiet = allDiet.map(e => {
         for (let i = 0; i < allDiet.length; i++) return e[i]
     })
@@ -80,8 +84,8 @@ router.get('/types', async (req, res) => {
     const completeDiet = await Diet.findAll();
     res.send(completeDiet);
 })
-/* 
-router.get(`/recipes/${idReceta}`, (req, res) => {
+
+router.get('/recipes/:idReceta', (req, res) => {
 
 })
 
@@ -93,7 +97,7 @@ router.post('/recipe', (req, res) => {
 
             
 
-*/
+
 
 
 module.exports = router;
