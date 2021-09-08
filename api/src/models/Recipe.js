@@ -36,7 +36,16 @@ module.exports = (sequelize) => {
     },
     cookingSteps: {
       type: DataTypes.STRING,
+      allowNull: true
+    },
+    dietsAvailable: {
+      type: DataTypes.STRING,
       allowNull: true,
     },
+    dbRecipe: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true,
+    }
   });
 };

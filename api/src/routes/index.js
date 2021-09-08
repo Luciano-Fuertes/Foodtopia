@@ -15,7 +15,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 const apiData = async () => {
-    const wholeThing = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=10&addRecipeInformation=true`)
+    const wholeThing = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=100&addRecipeInformation=true`)
     const result = await wholeThing.data.results.map(item => {
         return {
             id: item.id,
@@ -31,6 +31,7 @@ const apiData = async () => {
             score: item.spoonacularScore,
             healthyLevel: item.healthScore,
             cookingSteps: item.instructions,
+            dietsAvailable: item.diets,
         }
     })
     return result;
@@ -71,12 +72,9 @@ router.get('/recipes', async (req, res) => {
 })
 
 router.get('/types', async (req, res) => {
-    const dietApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=10&addRecipeInformation=true`);
+    const dietApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=100&addRecipeInformation=true`);
     const allDiet = dietApi.data.results.map(e => e.diets)
-    const reducedDiet = allDiet.map(e => {
-        for (let i = 0; i < allDiet.length; i++) return e[i]
-    })
-    reducedDiet.forEach(e => {
+    allDiet.flat().forEach(e => {
         Diet.findOrCreate({
             where: { name: e }
         })
@@ -85,17 +83,47 @@ router.get('/types', async (req, res) => {
     res.send(completeDiet);
 })
 
-router.get('/recipes/:idReceta', (req, res) => {
-
+router.get('/recipes/:idReceta', async (req, res) => {
+    const unfiltered = await allData();
+    const filtered = unfiltered.filter(e => parseInt(e.id) === parseInt(req.params.idReceta))
+    filtered?
+    res.status(200).send(filtered):
+    res.status(404).send('Recipe not found');
 })
 
 
-router.post('/recipe', (req, res) => {
+router.post('/recipe', async (req, res) => {
+    let {
+        name,
+        image,
+        summary,
+        ingredient,
+        score,
+        healthyLevel,
+        cookingSteps,
+        dietsAvailable,
+        dbRecipe,
+    } = req.body
 
-}) 
+    let originalRecipe = await Recipe.create({
+        name,
+        image,
+        summary,
+        ingredient,
+        score,
+        healthyLevel,
+        cookingSteps,
+        dbRecipe,
+    })
+
+    let availableDiets = await Diet.findAll({ where: { name: dietsAvailable } })
+
+    originalRecipe.addDiet(availableDiets)
+    res.send('Succesfully created recipe')
+})
 
 
-            
+
 
 
 
