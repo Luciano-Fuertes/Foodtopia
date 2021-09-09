@@ -2,7 +2,8 @@ import {
     GET_DIET_TYPE,
     GET_RECIPE_BY_ID,
     GET_RECIPE_BY_NAME,
-    POST_RECIPE
+    POST_RECIPE,
+    GET_ALL_RECIPES
 } from "../actions/actionType"
 
 const initialState = {
@@ -12,6 +13,12 @@ const initialState = {
 
 export default function rootReducer(state = initialState, { type, payload }) {
     switch (type) {
+
+        case GET_ALL_RECIPES:
+            return {
+                ...state,
+                recipes: payload,
+            }
         case GET_RECIPE_BY_NAME:
             return {
                 ...state,
