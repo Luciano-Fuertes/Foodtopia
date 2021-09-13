@@ -2,12 +2,16 @@ import {
     GET_DIET_TYPE,
     GET_RECIPE_BY_ID,
     GET_RECIPE_BY_NAME,
-    POST_RECIPE,
-    GET_ALL_RECIPES
+    POST_NEW_RECIPE,
+    GET_ALL_RECIPES,
+    FILTER_CREATED,
+    FILTER_BY_DIET,
+    ORDER_BY_NAME
 } from "../actions/actionType"
 
 const initialState = {
     recipes: [],
+    recipesBackup: [],
     dietType: []
 }
 
@@ -18,24 +22,58 @@ export default function rootReducer(state = initialState, { type, payload }) {
             return {
                 ...state,
                 recipes: payload,
-            }
-        case GET_RECIPE_BY_NAME:
-            return {
-                ...state,
-                recipes: payload,
-            }
-        case GET_RECIPE_BY_ID:
-            return {
-                ...state,
+                recipesBackup: payload,
             }
         case GET_DIET_TYPE:
             return {
                 ...state,
+                dietType: payload,
             }
-        case POST_RECIPE:
+        case FILTER_BY_DIET:
+            const allRecipes = state.recipesBackup;
+            const filtered = payload === 'All' ? allRecipes : allRecipes.filter(recipes => recipes.dietsAvailable.includes(payload))
+            return {
+                ...state,
+                recipes: filtered,
+            }
+        case FILTER_CREATED:
+            const backupRecipes = state.recipesBackup
+            const isOriginal = payload === 'Created' ? backupRecipes.filter(recipes => recipes.dbRecipe) : backupRecipes.filter(recipes => !recipes.dbRecipe);
+            return {
+                ...state,
+                recipes: payload === 'All' ? state.recipesBackup : isOriginal,
+            }
+        case ORDER_BY_NAME:
+            let nameSort = payload === 'Asc' ?
+                state.recipes.sort((a, b) => {
+                    if (a.name > b.name) return 1
+                    if (a.name > b.name) return -1
+                    else return 0
+                }) :
+                state.recipes.sort((a, b) => {
+                    if (a.name > b.name) return -1
+                    if (a.name > b.name) return 1
+                    else return 0;
+                })
+            return {
+                ...state,
+                recipes: nameSort,
+            }
+        case GET_RECIPE_BY_NAME:
+            return {
+                ...state,
+                recipes: payload
+            }
+        case GET_RECIPE_BY_ID:
+            return {
+                ...state,
+                recipes: payload
+            }
+        case POST_NEW_RECIPE:
             return {
                 ...state,
             }
+        default: return state;
 
     }
 };

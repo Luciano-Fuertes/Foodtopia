@@ -11,9 +11,10 @@ function Pages({ recipesPerPage, allRecipes, pageHandler }) {
         <nav>
             <ul>
                 {pageNumbers?.map((num) => {
+                    return (
                     <li className="number" key={num}>
                         <a onClick={() => pageHandler(num)}>{num}</a>
-                    </li>
+                    </li>)
                 })}
             </ul>
         </nav>

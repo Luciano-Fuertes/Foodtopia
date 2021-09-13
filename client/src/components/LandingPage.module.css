@@ -1,0 +1,45 @@
+.landing{
+    background-image: var(--background-image);
+    background-color: var(--background-color);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    backdrop-filter:blur(16px);
+    width: 100vw;
+    height: 100vh;
+    position:absolute;
+    object-fit: cover
+}
+
+.text{
+    background-color: var(--background-color);
+    display:block;
+    position: relative;
+    text-align: center;
+    top: 35vh;
+    padding: 0.6em;
+}
+
+.h1{
+    margin-top: 0.5vh;
+    padding-top: 0.5vh;    
+    font-weight: 700;
+}
+
+.button{
+    background-color: var(--button-color);
+    color: #cccccc;
+    font-weight: bold;
+    text-transform: capitalize;
+    padding: 0.20rem 0.70rem;
+    margin: 0 0.25rem 0.5rem;
+    border: solid 2px transparent;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    transition: background-color 0.25s;
+  }
+
+  .button:hover {
+    background-color: var(--button-hover);
+    color: #cccccc;
+  }

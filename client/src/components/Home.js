@@ -1,8 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecipe } from '../actions';
-import { Link } from 'react-router-dom'
+import { getAllRecipes, filterByDiet, filterCreated, orderByName } from '../actions';
 import Card from './Card';
 import NavBar from './NavBar';
 import Pages from './Pages';
@@ -10,7 +10,16 @@ import Pages from './Pages';
 function Home() {
 
     const dispatch = useDispatch();
+
+
+
+    useEffect(() => {
+        dispatch(getAllRecipes())
+    }, [dispatch])
+
     const allRecipes = useSelector((state) => state.recipes)
+    const allDiets = useSelector((state) => state.dietType)
+    const [render, setRender] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [recipesPerPage, setRecipesPerPage] = useState(9);
     const indexLast = currentPage * recipesPerPage;
@@ -21,14 +30,26 @@ function Home() {
         setCurrentPage(pageNumber);
     }
 
+    function handleClick(e) {
+        e.preventDefault()
+        dispatch(getAllRecipes())
+    }
 
-    useEffect(() => {
-        dispatch(getRecipe())
-    }, [dispatch])
+    function handleOrder(e) {
+        e.preventDefault()
+        dispatch(orderByName(e.target.value))
+        setCurrentPage(1);
+        setRender(`${e.target.value} order`);
+    }
 
-    function handleClick(event) {
-        event.preventDefault()
-        dispatch(getRecipe())
+    function handleFilterCreated(e) {
+        dispatch(filterCreated(e.target.value))
+        setCurrentPage(1);
+    }
+
+    function handleDietFilter(e) {
+        dispatch(filterByDiet(e.target.value))
+        setCurrentPage(1);
     }
 
     return (
@@ -39,14 +60,22 @@ function Home() {
                 Show All Recipes
             </button>
             <div>
-                <select>
-                    <option value='asc'>Asc</option>
-                    <option value='desc'>Desc</option>
+                <select onChange={e => handleOrder(e)}>
+                    <option value='Asc'>Asc</option>
+                    <option value='Desc'>Desc</option>
                 </select>
-                <select>
-                    <option value='all'>All</option>
-                    <option value='existent'>Existent</option>
-                    <option value='created'>Created</option>
+                <select onChange={e => handleFilterCreated(e)}>
+                    <option value='All'>All</option>
+                    <option value='Existent'>Existent</option>
+                    <option value='Created'>Created</option>
+                </select>
+                <select onChange={e => handleDietFilter(e)}>
+                    <option value='All Diets'>All Diets</option>
+                    {allDiets?.map((diet) => {
+                        return (
+                            <option value={diet.name}>{diet.name}</option>
+                        )
+                    })}
                 </select>
                 <Pages
                     recipesPerPage={recipesPerPage}
@@ -57,7 +86,11 @@ function Home() {
                     return (
                         <div>
                             <Link to={'/home/' + c.id}>
-                                <Card name={c.name} diet={c.diet} image={c.image} key={c.id} />
+                                <Card
+                                    name={c.name}
+                                    diet={c.diet}
+                                    image={c.image ? c.image : '../assets/image-not-found.png'}
+                                    key={c.id} />
                             </Link>
                         </div>
                     )
