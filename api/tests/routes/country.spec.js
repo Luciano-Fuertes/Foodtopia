@@ -6,14 +6,20 @@ const { Recipe, conn } = require('../../src/db.js');
 
 const agent = session(app);
 const recipe = {
-  name: 'Milanea a la napolitana',
+  id:"aasd543ds2-d993ja-113aj7sD-pS0a",
+  name: "Milanesa a la napolitana",
+  summary: "Alta milanga",
+  score: 78,
+  healthyLevel: 40,
+  cookingSteps: "Fritar",
+  ingredient:'narnia',
 };
 
 describe('Recipe routes', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
   beforeEach(() => Recipe.sync({ force: true })
     .then(() => Recipe.create(recipe)));
   describe('GET /recipes', () => {

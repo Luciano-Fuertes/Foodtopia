@@ -3,8 +3,8 @@
 :root{
   --background-image: url('./assets/maximilian-zahn-_bdZsLY2gsY-unsplash.jpg');
   --background-color: #cccccca6;
-  --button-color: #858282;
-  --button-hover: #a09c9c;
+  --button-color: #727171;
+  --button-hover: #858282;
 }
 
 body {

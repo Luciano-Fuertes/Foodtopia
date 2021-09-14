@@ -1,0 +1,31 @@
+body{
+    background: linear-gradient(135deg, var(--background-color) 21px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
+                linear-gradient(225deg, var(--background-color) 21px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
+    background-color: var(--background-color);
+    background-size: 64px 128px;  
+}
+
+.container{
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center
+}
+
+.button {
+    background-color: var(--button-color);
+    color: #cccccc;
+    font-weight: bold;
+    padding: 0.25rem 1.20rem;
+    margin: 0 0.25rem 0.5rem;
+    border: solid 2px transparent;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: background-color 0.10s;
+}
+    
+.button:hover {
+    background-color: var(--button-hover);
+    color: #cccccc;
+}

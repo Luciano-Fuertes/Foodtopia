@@ -39,8 +39,10 @@ export function getRecipeByName(payload) {
 }
 export function getRecipeById(payload) {
     return async function (dispatch) {
+
         try {
             var json = await axios.get(`http://localhost:3001/recipes/${payload}`);
+
             return dispatch({
                 type: GET_RECIPE_BY_ID,
                 payload: json.data

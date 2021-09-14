@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getRecipeByName } from '../actions/index';
+import styles from './NavBar.module.css'
 
 function NavBar() {
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ function NavBar() {
     return (
         <div>
             <input type='text' onChange={(e) => { handleInput(e) }} placeholder='search recipes...' />
-            <button type='submit' onClick={(e) => { handleSubmit(e) }}>Search</button>
+            <button className={styles.button} type='submit' onClick={(e) => { handleSubmit(e) }}>Search</button>
         </div>
     )
 }

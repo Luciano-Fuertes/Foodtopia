@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './Pages.module.css'
 
 function Pages({ recipesPerPage, allRecipes, pageHandler }) {
     const pageNumbers = []
@@ -12,9 +13,9 @@ function Pages({ recipesPerPage, allRecipes, pageHandler }) {
             <ul>
                 {pageNumbers?.map((num) => {
                     return (
-                    <li className="number" key={num}>
+                    <button className={styles.number} key={num}>
                         <a onClick={() => pageHandler(num)}>{num}</a>
-                    </li>)
+                    </button>)
                 })}
             </ul>
         </nav>

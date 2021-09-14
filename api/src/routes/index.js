@@ -72,23 +72,21 @@ router.get('/recipes', async (req, res) => {
 })
 
 router.get('/types', async (req, res) => {
-    const dietApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${YOUR_API_KEY}&number=100&addRecipeInformation=true`);
-    const allDiet = dietApi.data.results.map(e => e.diets)
-    allDiet.flat().forEach(e => {
-        Diet.findOrCreate({
-            where: { name: e }
-        })
-    })
-    const completeDiet = await Diet.findAll();
-    res.send(completeDiet);
+    try {
+        await Diet.findAll()
+            .then((someDiet) => {
+                return res.send(someDiet);
+            })
+    } catch (err) { console.log(err) }
 })
+
 
 router.get('/recipes/:idReceta', async (req, res) => {
     const unfiltered = await allData();
     const filtered = unfiltered.filter(e => parseInt(e.id) === parseInt(req.params.idReceta))
-    filtered?
-    res.status(200).send(filtered):
-    res.status(404).send('Recipe not found');
+    filtered ?
+        res.status(200).send(filtered) :
+        res.status(404).send('Recipe not found');
 })
 
 

@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllRecipes, filterByDiet, filterCreated, orderByName } from '../actions';
+import { getAllRecipes, getDietType, filterByDiet, filterCreated, orderByName } from '../actions';
 import Card from './Card';
 import NavBar from './NavBar';
 import Pages from './Pages';
+import styles from './Home.module.css';
 
 function Home() {
 
@@ -15,6 +16,7 @@ function Home() {
 
     useEffect(() => {
         dispatch(getAllRecipes())
+        dispatch(getDietType())
     }, [dispatch])
 
     const allRecipes = useSelector((state) => state.recipes)
@@ -55,8 +57,8 @@ function Home() {
     return (
         <div>
             <NavBar className="Nav" />
-            <Link to='/recipe'>Submit New Recipe</Link>
-            <button onClick={e => { handleClick(e) }}>
+            <Link to='/recipe' className={styles.button}>Submit New Recipe</Link>
+            <button className={styles.button} onClick={e => { handleClick(e) }}>
                 Show All Recipes
             </button>
             <div>
@@ -82,19 +84,21 @@ function Home() {
                     allRecipes={allRecipes.length}
                     pageHandler={pageHandler}
                 />
-                {currentRecipe?.map((c) => {
-                    return (
-                        <div>
-                            <Link to={'/home/' + c.id}>
-                                <Card
-                                    name={c.name}
-                                    diet={c.diet}
-                                    image={c.image ? c.image : '../assets/image-not-found.png'}
-                                    key={c.id} />
-                            </Link>
-                        </div>
-                    )
-                })}
+                <div className={styles.container}>
+                    {currentRecipe?.map((c) => {
+                        return (
+                            <div>
+                                <Link to={'/home/' + c.id}>
+                                    <Card
+                                        name={c.name}
+                                        diet={c.diet}
+                                        image={c.image ? c.image : '../assets/image-not-found.png'}
+                                        key={c.id} />
+                                </Link>
+                            </div>
+                        )
+                    })}
+                </div>
             </div>
         </div>
     )
