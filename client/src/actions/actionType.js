@@ -5,4 +5,5 @@ export const FILTER_CREATED = 'FILTER_CREATED';
 export const GET_RECIPE_BY_NAME = 'GET_RECIPE_BY_NAME';
 export const GET_RECIPE_BY_ID = 'GET_RECIPE_BY_ID';
 export const ORDER_BY_NAME = 'ORDER_BY_NAME';
+export const ORDER_BY_SCORE = 'ORDER_BY_SCORE';
 export const POST_NEW_RECIPE = 'POST_NEW_RECIPE';

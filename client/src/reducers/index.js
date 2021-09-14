@@ -6,7 +6,8 @@ import {
     GET_ALL_RECIPES,
     FILTER_CREATED,
     FILTER_BY_DIET,
-    ORDER_BY_NAME
+    ORDER_BY_NAME,
+    ORDER_BY_SCORE
 } from "../actions/actionType"
 
 const initialState = {
@@ -47,17 +48,33 @@ export default function rootReducer(state = initialState, { type, payload }) {
             let nameSort = payload === 'Asc' ?
                 state.recipes.sort((a, b) => {
                     if (a.name > b.name) return 1
-                    if (a.name > b.name) return -1
+                    if (b.name > a.name) return -1
                     else return 0
                 }) :
                 state.recipes.sort((a, b) => {
                     if (a.name > b.name) return -1
-                    if (a.name > b.name) return 1
+                    if (b.name > a.name) return 1
                     else return 0;
                 })
             return {
                 ...state,
                 recipes: nameSort,
+            }
+        case ORDER_BY_SCORE:
+            let scoreSort = payload === 'Score Up' ?
+                state.recipes.sort((a, b) => {
+                    if (a.score > b.score) return 1
+                    if (b.score > a.score) return -1
+                    return 0
+                }) :
+                state.recipes.sort((a, b) => {
+                    if (a.score > b.score) return -1
+                    if (b.score > a.score) return 1
+                    return 0;
+                })
+            return {
+                ...state,
+                recipes: scoreSort,
             }
         case GET_RECIPE_BY_NAME:
             return {

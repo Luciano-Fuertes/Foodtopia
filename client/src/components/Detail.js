@@ -20,13 +20,26 @@ function Detail(props) {
         <div>
             {recipeDetails.length > 0 ?
                 <div>
-                    <h1>{recipeDetails[0].name}</h1>
-                    <img src={recipeDetails[0].image ? recipeDetails[0].image : '../assets/image-not-found.png'} alt='no image' />
-                    <h3>Score {recipeDetails[0].score}</h3>
-                    <h3>Healthy Level {recipeDetails[0].healthyLevel}</h3>
-                    <p className={styles.text} dangerouslySetInnerHTML={{ __html: recipeDetails[0].summary }} ></p>
-                    <p>{recipeDetails[0].dietsAvailable}</p>
-                    <Link to='/home'className={styles.button}><button>Back Home</button></Link>
+                    <h1 className= {styles.title}>{recipeDetails[0].name}</h1>
+                    <div className={styles.container}>
+                        <div>
+                            <img src={recipeDetails[0].image ? recipeDetails[0].image : '../assets/image-not-found.png'} alt='no image' />
+                        </div>
+                        <div>
+                            <div className={styles.scoresContainer}>
+                                <h3>Score {recipeDetails[0].score}</h3>
+                                <h3>Healthy Level {recipeDetails[0].healthyLevel}</h3>
+                            </div>
+                            <h4>Recommended for diets</h4>
+                            <p>{recipeDetails[0].dietsAvailable.map(diet => diet + ', ')}</p>
+                            <h4>Summary</h4>
+                            <p className={styles.text} dangerouslySetInnerHTML={{ __html: recipeDetails[0].summary }} ></p>
+                        </div>
+                    </div>
+                    <div>
+                        {recipeDetails[0].cookingSteps && <p>{recipeDetails[0].cookingSteps}</p>}
+                    </div>
+                    <Link to='/home'><button className={styles.button}>Back Home</button></Link>
                 </div> : 'la prueba de que no quiere andar'}
         </div>
     )

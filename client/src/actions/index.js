@@ -4,6 +4,7 @@ import {
     FILTER_BY_DIET,
     FILTER_CREATED,
     ORDER_BY_NAME,
+    ORDER_BY_SCORE,
     GET_RECIPE_BY_NAME,
     GET_RECIPE_BY_ID,
     GET_DIET_TYPE
@@ -87,6 +88,12 @@ export function filterCreated(payload) {
 export function orderByName(payload) {
     return {
         type: ORDER_BY_NAME,
+        payload
+    }
+}
+export function orderByScore(payload) {
+    return {
+        type: ORDER_BY_SCORE,
         payload
     }
 }

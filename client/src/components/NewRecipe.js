@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { postNewRecipe, getDietType } from '../actions'
 import { Link, useHistory } from 'react-router-dom'
+import styles from './NewRecipe.module.css'
 
 function validate(input) {
     let errors = {};
@@ -109,7 +110,6 @@ function NewRecipe() {
                 <div>
                     <label>Name</label>
                     <input  required="required" onChange={(e) => handleChange(e)} type='text' name='name' value={formInput.name} />
-                    {errors.name && <p>{errors.name}</p>}
                </div>
                 <div>
                     <label>Picture</label>
@@ -118,24 +118,20 @@ function NewRecipe() {
                 <div>
                     <label>Summary</label>
                     <input  required="required" onChange={(e) => handleChange(e)} type='text' name='summary' value={formInput.summary} />
-                    {errors.summary && <p>{errors.summary}</p>}
                 </div>
                 <div>
                     <label>Ingredient</label>
                     <input  required="required" onChange={(e) => handleChange(e)} type='text' name='ingredient' value={formInput.ingredient} />
-                    {errors.ingredient && <p>{errors.ingredient}</p>}
                 </div>
                 <div>
                     <label>Score</label>
                     <input onChange={(e) => handleChange(e)} type='number' name='score'
                         min='1' max='100' placeholder='From 1 to 100' />
-                        {errors.score && <p>{errors.score}</p>}
                 </div>
                 <div>
                     <label>Healthy Level</label>
                     <input onChange={(e) => handleChange(e)} type='number' name='healthyLevel' value={formInput.healthyLevel}
                         min='1' max='100' placeholder='From 1 to 100' />
-                        {errors.healthyLevel && <p>{errors.healthyLevel}</p>}
                 </div>
                 <div>
                     <label>Cooking Steps</label>
@@ -151,11 +147,16 @@ function NewRecipe() {
                     <ul><li>{formInput.dietsAvailable.map(diet => diet + ', ')}</li></ul>
                 </div>
                 <div>
-                    <Link to='/home'><button>Back</button></Link>
-                    <button type='submit'>Submit Recipe</button>
-                    <button type='reset' onClick={handleReset} >Reset all</button>
+                    <Link to='/home'><button className={styles.button}>Back</button></Link>
+                    <button className={styles.button} type='submit'>Submit Recipe</button>
+                    <button className={styles.button} type='reset' onClick={handleReset} >Reset all</button>
                 </div>
             </form>
+            {errors.name && <p>{errors.name}</p>}
+            {errors.summary && <p>{errors.summary}</p>}
+            {errors.ingredient && <p>{errors.ingredient}</p>}
+            {errors.score && <p>{errors.score}</p>}
+            {errors.healthyLevel && <p>{errors.healthyLevel}</p>}
         </div>
     )
 }

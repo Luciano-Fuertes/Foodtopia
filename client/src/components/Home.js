@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllRecipes, getDietType, filterByDiet, filterCreated, orderByName } from '../actions';
+import { getAllRecipes, getDietType, filterByDiet, filterCreated, orderByName, orderByScore } from '../actions';
 import Card from './Card';
 import NavBar from './NavBar';
 import Pages from './Pages';
@@ -43,6 +43,13 @@ function Home() {
         setCurrentPage(1);
         setRender(`${e.target.value} order`);
     }
+    function handleScoreOrder(e) {
+        e.preventDefault()
+        dispatch(orderByScore(e.target.value))
+        setCurrentPage(1);
+        setRender(`${e.target.value} order`);
+    }
+
 
     function handleFilterCreated(e) {
         dispatch(filterCreated(e.target.value))
@@ -63,8 +70,12 @@ function Home() {
             </button>
             <div>
                 <select onChange={e => handleOrder(e)}>
-                    <option value='Asc'>Asc</option>
-                    <option value='Desc'>Desc</option>
+                    <option value='Asc'>Name Up</option>
+                    <option value='Desc'>Name Down</option>
+                </select>
+                <select onChange={e => handleScoreOrder(e)}>
+                    <option value='Score Up'>Score Up</option>
+                    <option value='Score Down'>Score Down</option>
                 </select>
                 <select onChange={e => handleFilterCreated(e)}>
                     <option value='All'>All</option>
@@ -91,7 +102,7 @@ function Home() {
                                 <Link to={'/home/' + c.id}>
                                     <Card
                                         name={c.name}
-                                        diet={c.diet}
+                                        diet={c.dietsAvailable}
                                         image={c.image ? c.image : '../assets/image-not-found.png'}
                                         key={c.id} />
                                 </Link>
