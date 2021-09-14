@@ -30,5 +30,6 @@
 
 .container {
     display:grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
+    margin: 0.7em;
 }

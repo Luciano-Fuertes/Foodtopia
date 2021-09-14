@@ -6,7 +6,7 @@ import styles from './NewRecipe.module.css'
 
 function validate(input) {
     let errors = {};
-    if (input.name == false) {
+    if (!input.name) {
         errors.name = 'Name must be provided'
     }
     if (!input.summary) {
@@ -22,7 +22,7 @@ function validate(input) {
         errors.healthyLevel = 'Only numbers are allowed'
     }
     if (input.score > 100 || input.score < 1) {
-        errors.score = 'The score must be between 1 and 100'
+        errors.score = 'The Score must be between 1 and 100'
     }
     if (input.healthyLevel > 100 || input.healthyLevel < 1) {
         errors.healthyLevel = 'The Healthy Level must be between 1 and 100'
@@ -108,37 +108,37 @@ function NewRecipe() {
             <h2>Build a new recipe!</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <div>
-                    <label>Name</label>
-                    <input  required="required" onChange={(e) => handleChange(e)} type='text' name='name' value={formInput.name} />
-               </div>
+                    <label>Name </label>
+                    <input required="required" onChange={(e) => handleChange(e)} type='text' name='name' value={formInput.name} />
+                </div>
                 <div>
-                    <label>Picture</label>
+                    <label>Picture </label>
                     <input onChange={(e) => handleChange(e)} type='text' name='image' value={formInput.image} />
                 </div>
                 <div>
-                    <label>Summary</label>
-                    <input  required="required" onChange={(e) => handleChange(e)} type='text' name='summary' value={formInput.summary} />
+                    <label>Summary </label>
+                    <input required="required" onChange={(e) => handleChange(e)} type='text' name='summary' value={formInput.summary} />
                 </div>
                 <div>
-                    <label>Ingredient</label>
-                    <input  required="required" onChange={(e) => handleChange(e)} type='text' name='ingredient' value={formInput.ingredient} />
+                    <label>Ingredients </label>
+                    <input required="required" onChange={(e) => handleChange(e)} type='text' name='ingredient' value={formInput.ingredient} />
                 </div>
                 <div>
-                    <label>Score</label>
+                    <label>Score </label>
                     <input onChange={(e) => handleChange(e)} type='number' name='score'
-                        min='1' max='100' placeholder='From 1 to 100' />
+                        min='1' max='100' />
                 </div>
                 <div>
-                    <label>Healthy Level</label>
+                    <label>Healthy Level </label>
                     <input onChange={(e) => handleChange(e)} type='number' name='healthyLevel' value={formInput.healthyLevel}
-                        min='1' max='100' placeholder='From 1 to 100' />
+                        min='1' max='100' />
                 </div>
                 <div>
-                    <label>Cooking Steps</label>
+                    <label>Cooking Steps </label>
                     <input onChange={(e) => handleChange(e)} type='textarea' name='cookingSteps' value={formInput.cookingSteps} />
                 </div>
                 <div>
-                    <label>Diet Type</label>
+                    <label>Diet Type </label>
                     <select onChange={handleDietsChange}>
                         {getDiets.map((diet) => {
                             return (<option name={diet.name}>{diet.name}</option>);

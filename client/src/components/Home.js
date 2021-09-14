@@ -64,25 +64,27 @@ function Home() {
     return (
         <div>
             <NavBar className="Nav" />
+            <div className={styles.containerNav}>                
             <Link to='/recipe' className={styles.button}>Submit New Recipe</Link>
             <button className={styles.button} onClick={e => { handleClick(e) }}>
                 Show All Recipes
             </button>
+            </div>
             <div>
-                <select onChange={e => handleOrder(e)}>
+                <select className={styles.round} onChange={e => handleOrder(e)}>
                     <option value='Asc'>Name Up</option>
                     <option value='Desc'>Name Down</option>
                 </select>
-                <select onChange={e => handleScoreOrder(e)}>
+                <select className={styles.round} onChange={e => handleScoreOrder(e)}>
                     <option value='Score Up'>Score Up</option>
                     <option value='Score Down'>Score Down</option>
                 </select>
-                <select onChange={e => handleFilterCreated(e)}>
+                <select className={styles.round} onChange={e => handleFilterCreated(e)}>
                     <option value='All'>All</option>
                     <option value='Existent'>Existent</option>
                     <option value='Created'>Created</option>
                 </select>
-                <select onChange={e => handleDietFilter(e)}>
+                <select className={styles.round} onChange={e => handleDietFilter(e)}>
                     <option value='All Diets'>All Diets</option>
                     {allDiets?.map((diet) => {
                         return (
@@ -95,7 +97,7 @@ function Home() {
                     allRecipes={allRecipes.length}
                     pageHandler={pageHandler}
                 />
-                <div className={styles.container}>
+                <div className={styles.containerCards}>
                     {currentRecipe?.map((c) => {
                         return (
                             <div>

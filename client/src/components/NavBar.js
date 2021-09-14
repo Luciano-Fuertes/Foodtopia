@@ -19,7 +19,7 @@ function NavBar() {
 
     return (
         <div>
-            <input type='text' onChange={(e) => { handleInput(e) }} placeholder='search recipes...' />
+            <input className={styles.inputBar}type='text' onChange={(e) => { handleInput(e) }} placeholder='Search recipes...' />
             <button className={styles.button} type='submit' onClick={(e) => { handleSubmit(e) }}>Search</button>
         </div>
     )

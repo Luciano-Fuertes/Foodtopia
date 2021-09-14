@@ -23,7 +23,7 @@ function Detail(props) {
                     <h1 className= {styles.title}>{recipeDetails[0].name}</h1>
                     <div className={styles.container}>
                         <div>
-                            <img src={recipeDetails[0].image ? recipeDetails[0].image : '../assets/image-not-found.png'} alt='no image' />
+                            <img src={recipeDetails[0].image ? recipeDetails[0].image : '../assets/image-not-found.png'} alt= '' />
                         </div>
                         <div>
                             <div className={styles.scoresContainer}>

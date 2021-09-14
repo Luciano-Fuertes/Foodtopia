@@ -1,9 +1,29 @@
 .cardName{
-    
+    margin: 0;
+    text-decoration: none;
 }
-.cardDiet + .cardDiet{
-    margin-right: 0.3em;
+.cardDiet{
+    margin: 0;
+    text-decoration: none;
 }
 .cardImg{
+    border: 5px solid var(--button-color);
+    border-radius: 50%;
+}
 
+.textContainer{
+    align-items: center;
+    display: flex;
+    height: 20vh;
+    justify-content: center;
+    width: 23vw;
+    flex-direction: column;
+    row-gap: 0.8em;
+    margin: 1em;
+    text-decoration: none;
+}
+
+.cardContainer{
+    margin-bottom: 0.5em;
+    margin-right: 0.5em;
 }
