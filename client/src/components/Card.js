@@ -5,8 +5,8 @@ function Card({ image, name, diet }) {
     return (
         <div className={style.cardContainer}>
             <div className={style.textContainer}>
-                <h3 className={style.cardName}>{name}</h3>
-                <h5 className={style.cardDiet}>{diet.map(diet => diet + ', ')}</h5>
+                <p className={style.cardName}>{name}</p>
+                <p className={style.cardDiet}>{diet.map(diet => diet + ', ')}</p>
             </div>
             <img className={style.cardImg} src={image} alt='img not found' />
         </div>

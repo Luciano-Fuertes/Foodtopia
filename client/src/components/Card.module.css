@@ -1,10 +1,17 @@
 .cardName{
+    color: black;
     margin: 0;
     text-decoration: none;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size:1.1em;
 }
 .cardDiet{
+    color: black;
     margin: 0;
     text-decoration: none;
+    text-transform: capitalize;
+    font-size:0.8em
 }
 .cardImg{
     border: 5px solid var(--button-color);
@@ -24,6 +31,9 @@
 }
 
 .cardContainer{
+    background-color: #727171a7;
+    border-radius: 20%;
+    padding: 0.5em;
     margin-bottom: 0.5em;
     margin-right: 0.5em;
 }

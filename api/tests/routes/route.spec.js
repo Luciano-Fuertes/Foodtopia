@@ -6,7 +6,7 @@ const { Recipe, conn } = require('../../src/db.js');
 
 const agent = session(app);
 const recipe = {
-  id:"aasd543ds2-d993ja-113aj7sD-pS0a",
+  id:"aa5sd543ds2-d993ja-113aj7sD-pS0a",
   name: "Milanesa a la napolitana",
   summary: "Alta milanga",
   score: 78,
